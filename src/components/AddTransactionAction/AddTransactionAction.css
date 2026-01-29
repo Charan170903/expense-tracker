@@ -1,0 +1,32 @@
+.add-transaction-zone {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.add-transaction-btn {
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--color-accent);
+    color: var(--color-accent-text);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.add-transaction-btn:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.add-transaction-icon {
+    font-size: 1.25rem;
+}

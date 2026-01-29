@@ -1,0 +1,104 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    padding: 0.5rem 0;
+    flex-shrink: 0;
+}
+
+.header__title {
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text-primary);
+    letter-spacing: -0.5px;
+}
+
+.header__controls {
+    display: flex;
+    align-items: center;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 0.25rem;
+    box-shadow: var(--shadow-sm);
+    gap: 0.25rem;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+.theme-toggle__icon {
+    font-size: 1.25rem;
+}
+
+.header__selector {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    outline: none;
+}
+
+.header__selector:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-primary);
+}
+
+.header__selector:focus {
+    color: var(--color-text-primary);
+    background: var(--color-neutral-bg);
+}
+
+.header__selector+.header__selector {
+    border-left: 1px solid var(--color-border);
+    margin-left: 0.125rem;
+    border-radius: 8px;
+}
+
+@media (max-width: 640px) {
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .header__title {
+        text-align: center;
+    }
+
+    .header__controls {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .header__selector {
+        flex: 1;
+        text-align: center;
+    }
+}

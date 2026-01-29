@@ -1,0 +1,81 @@
+.balance-card {
+    background: var(--color-bg-secondary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.balance-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+}
+
+.balance-card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.balance-card__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 0.25rem 0;
+}
+
+.balance-card__amount {
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    font-weight: 800;
+    margin: 0;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.balance-card__amount.negative {
+    color: var(--color-expense);
+}
+
+.balance-card__awareness {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-neutral-text);
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-neutral-bg);
+    border-radius: 99px;
+    display: inline-block;
+    border: 1px solid var(--color-border);
+}
+
+.balance-card__confidence {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confidence-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
