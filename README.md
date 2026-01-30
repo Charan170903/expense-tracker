@@ -23,7 +23,7 @@ A modern, full-stack expense tracking application with intelligent financial ins
 - [Architecture](#-architecture)
 - [Getting Started](#-getting-started)
 - [Deployment](#-deployment)
--[Project Structure](#-project-structure)
+- [Project Structure](#-project-structure)
 - [API Documentation](#-api-documentation)
 - [Environment Variables](#-environment-variables)
 - [Contributing](#-contributing)
@@ -48,7 +48,7 @@ A modern, full-stack expense tracking application with intelligent financial ins
 ### Core Functionality
 - 🔐 **Secure Authentication** - JWT-based authentication with bcrypt password hashing
 - 💰 **Transaction Management** - Full CRUD operations for income and expenses
-- 📊 **Financial Insights** - AI-powered spending analysis and pattern detection
+- 📊 **Financial Insights** - Intelligent spending analysis and pattern detection
 - 📅 **Time-Based Filtering** - View transactions by month (last 12 months)
 - 🏷️ **Category Organization** - 14 predefined categories for precise tracking
 - 💾 **Cloud Persistence** - MongoDB Atlas integration for reliable data storage
@@ -335,35 +335,6 @@ GET    /api/insights/year-overview        Yearly overview (protected)
 GET    /api/health            Server health check
 ```
 
-### Example Requests
-
-**Register User:**
-```bash
-curl -X POST https://expense-tracker-backend-e2yj.onrender.com/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "user@example.com",
-    "password": "SecurePass123"
-  }'
-```
-
-**Add Transaction:**
-```bash
-curl -X POST https://expense-tracker-backend-e2yj.onrender.com/api/transactions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  -d '{
-    "type": "expense",
-    "title": "Groceries",
-    "amount": 1500,
-    "category": "food",
-    "date": "2026-01-30",
-    "notes": "Weekly shopping"
-  }'
-```
-
-For complete API documentation, see [backend/INSIGHTS_API.md](./backend/INSIGHTS_API.md)
-
 ---
 
 ## 🔐 Environment Variables
@@ -410,41 +381,6 @@ The application uses a refined, professional color scheme detailed in [BRAND_PAL
 ### Typography
 - **Font**: Inter (Google Fonts)
 - **Weights**: 400 (regular), 500 (medium), 700 (bold)
-- **Responsive sizing**: Scales appropriately on all devices
-
----
-
-## 🧪 Testing
-
-```bash
-# Backend tests
-cd backend
-npm test
-
-# Frontend tests
-cd expense-tracker
-npm test
-
-# Build production
-npm run build
-```
-
----
-
-## 📊 Performance
-
-### Metrics
-- **Lighthouse Score**: 95+ (Performance, Best Practices)
-- **Frontend Load Time**: <2s (First Contentful Paint)
-- **API Response Time**: <200ms (average)
-- **Database Queries**: <100ms (indexed queries)
-
-### Optimizations
-- Vite build optimization
-- MongoDB indexing on frequent queries
-- JWT token caching
-- React component memoization
-- CSS minification
 
 ---
 
@@ -457,11 +393,6 @@ Contributions are welcome! Please follow these steps:
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-### Code Style
-- ESLint configuration included
-- Prettier for code formatting
-- Follow existing patterns
 
 ---
 
@@ -480,22 +411,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 Acknowledgments
-
-- MongoDB for excellent database documentation
-- Vercel and Render for deployment platforms
-- React and Vite communities for amazing tools
-- All open-source contributors
-
----
-
 ## 📌 Project Status
 
 **Status**: ✅ Production Ready & Deployed
-
-**Version**: 1.0.0  
-**Last Updated**: January 30, 2026  
-**Deployment**: Live on Vercel + Render  
+**Version**: 1.0.0
+**Last Updated**: January 30, 2026
 
 ---
 
@@ -506,14 +426,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ⭐ Star this repo if you find it helpful!
 
 </div>
-
-
-## Deployment
-
-Deployed on Vercel: https://expense-tracker-indol-eight-74.vercel.app
-
-See main [DEPLOYMENT.md](../DEPLOYMENT.md) for details.
-
-## License
-
-MIT
