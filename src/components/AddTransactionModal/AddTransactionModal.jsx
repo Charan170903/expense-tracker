@@ -45,23 +45,23 @@ function AddTransactionModal({ isOpen, onClose, onAdd, currentFilteredTransactio
     ];
 
     const expenseCategories = [
-        { value: 'food', label: 'Food & Dining', icon: MdFastfood },
-        { value: 'transport', label: 'Transportation', icon: MdDirectionsCar },
-        { value: 'shopping', label: 'Shopping', icon: MdShoppingBag },
-        { value: 'bills', label: 'Bills & Utilities', icon: MdLightbulb },
-        { value: 'entertainment', label: 'Entertainment', icon: MdMovie },
-        { value: 'health', label: 'Healthcare', icon: MdLocalHospital },
-        { value: 'education', label: 'Education', icon: MdSchool },
-        { value: 'other', label: 'Other', icon: MdCategory },
+        { value: 'Food & Dining', label: 'Food & Dining', icon: MdFastfood },
+        { value: 'Transportation', label: 'Transportation', icon: MdDirectionsCar },
+        { value: 'Shopping', label: 'Shopping', icon: MdShoppingBag },
+        { value: 'Bills & Utilities', label: 'Bills & Utilities', icon: MdLightbulb },
+        { value: 'Entertainment', label: 'Entertainment', icon: MdMovie },
+        { value: 'Healthcare', label: 'Healthcare', icon: MdLocalHospital },
+        { value: 'Education', label: 'Education', icon: MdSchool },
+        { value: 'Other', label: 'Other', icon: MdCategory },
     ];
 
     const incomeCategories = [
-        { value: 'salary', label: 'Salary', icon: MdWork },
-        { value: 'freelance', label: 'Freelance', icon: MdLaptop },
-        { value: 'investment', label: 'Investment', icon: MdShowChart },
-        { value: 'business', label: 'Business', icon: MdBusiness },
-        { value: 'gift', label: 'Gift', icon: MdCardGiftcard },
-        { value: 'other', label: 'Other', icon: MdAccountBalanceWallet },
+        { value: 'Salary', label: 'Salary', icon: MdWork },
+        { value: 'Freelance', label: 'Freelance', icon: MdLaptop },
+        { value: 'Investment', label: 'Investment', icon: MdShowChart },
+        { value: 'Business', label: 'Business', icon: MdBusiness },
+        { value: 'Gift', label: 'Gift', icon: MdCardGiftcard },
+        { value: 'Other', label: 'Other', icon: MdAccountBalanceWallet },
     ];
 
     const categories = type === 'expense' ? expenseCategories : incomeCategories;

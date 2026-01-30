@@ -19,19 +19,19 @@ import dayjs from 'dayjs';
 import './TransactionItem.css';
 
 const categoryIcons = {
-    food: MdFastfood,
-    transport: MdDirectionsCar,
-    shopping: MdShoppingBag,
-    bills: MdLightbulb,
-    entertainment: MdMovie,
-    health: MdLocalHospital,
-    education: MdSchool,
-    salary: MdWork,
-    freelance: MdLaptop,
-    investment: MdTrendingUp,
-    business: MdBusiness,
-    gift: MdCardGiftcard,
-    other: MdCategory,
+    'Food & Dining': MdFastfood,
+    'Transportation': MdDirectionsCar,
+    'Shopping': MdShoppingBag,
+    'Bills & Utilities': MdLightbulb,
+    'Entertainment': MdMovie,
+    'Healthcare': MdLocalHospital,
+    'Education': MdSchool,
+    'Salary': MdWork,
+    'Freelance': MdLaptop,
+    'Investment': MdTrendingUp,
+    'Business': MdBusiness,
+    'Gift': MdCardGiftcard,
+    'Other': MdCategory,
 };
 
 function TransactionItem({ transaction, onDelete, onUpdateSubscription }) {
