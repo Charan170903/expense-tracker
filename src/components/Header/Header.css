@@ -9,12 +9,36 @@
     flex-shrink: 0;
 }
 
-.header__title {
-    font-size: clamp(1.25rem, 4vw, 1.5rem);
+.brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.brand__name {
+    font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
     color: var(--color-text-primary);
-    letter-spacing: -0.5px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+}
+
+.brand__char {
+    display: inline-block;
+}
+
+.brand__char.accent {
+    color: var(--color-brand-accent);
+}
+
+.brand__tagline {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    margin: 0.25rem 0 0 0;
+    letter-spacing: 0.02em;
+    opacity: 0.9;
 }
 
 .header__controls {
@@ -86,6 +110,15 @@
         align-items: stretch;
         gap: 1rem;
         margin-bottom: 1rem;
+    }
+
+    .brand {
+        align-items: center;
+        text-align: center;
+    }
+
+    .brand__tagline {
+        display: none;
     }
 
     .header__title {

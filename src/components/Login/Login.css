@@ -1,0 +1,337 @@
+/* Login.css - Premium Authentication Design */
+
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    overflow-x: hidden;
+}
+
+/* --- Left Visual Panel --- */
+.login-visual-panel {
+    display: none;
+    /* Hidden on mobile by default */
+    width: 45%;
+    background-color: var(--color-neutral-bg);
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem;
+    overflow: hidden;
+}
+
+.visual-content {
+    position: relative;
+    z-index: 10;
+    max-width: 480px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.brand-display {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.brand-name {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--color-text-primary);
+    line-height: 1;
+}
+
+.brand-name .accent {
+    color: var(--color-brand-accent);
+}
+
+.visual-heading {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    opacity: 0.9;
+}
+
+/* Subtle pattern for engagement */
+.visual-pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+/* --- Right Form Panel --- */
+.login-form-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-secondary);
+    position: relative;
+}
+
+.panel-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.theme-toggle-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+    background: transparent;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--color-neutral-bg);
+    color: var(--color-text-primary);
+}
+
+.form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    animation: slideUp 0.6s ease-out;
+}
+
+.form-header {
+    margin-bottom: 2.5rem;
+    text-align: left;
+    /* Aligned left for composed feel */
+}
+
+.form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.form-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}
+
+/* --- Form Elements --- */
+.premium-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.input-field-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.field-icon {
+    position: absolute;
+    left: 1rem;
+    color: var(--color-text-secondary);
+    font-size: 1.25rem;
+    pointer-events: none;
+}
+
+.input-field-wrapper input {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 3rem;
+    /* Left padding for icon */
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    background-color: var(--color-bg-primary);
+    /* Slight contrast from generic white */
+    transition: all 0.2s ease;
+}
+
+.input-field-wrapper input:focus {
+    border-color: var(--color-brand-accent);
+    box-shadow: 0 0 0 1px var(--color-brand-accent);
+    background-color: var(--color-bg-secondary);
+}
+
+.visibility-toggle {
+    position: absolute;
+    right: 1rem;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+}
+
+.visibility-toggle:hover {
+    color: var(--color-text-primary);
+}
+
+.submit-btn {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.form-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+}
+
+.link-btn {
+    color: var(--color-accent);
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: inherit;
+    transition: color 0.2s;
+}
+
+.link-btn:hover {
+    text-decoration: underline;
+}
+
+.form-error {
+    padding: 0.75rem 1rem;
+    background-color: var(--color-expense-bg);
+    color: var(--color-expense);
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+}
+
+/* --- Attribution Footer --- */
+.panel-footer {
+    padding: 2rem;
+    margin-top: auto;
+    /* Push to bottom */
+    border-top: 1px solid var(--color-border);
+}
+
+.attribution {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.social-links a:hover {
+    color: var(--color-accent);
+}
+
+/* --- Media Queries --- */
+@media (min-width: 1024px) {
+    .login-page {
+        flex-direction: row;
+    }
+
+    .login-visual-panel {
+        display: flex;
+    }
+
+    .panel-footer {
+        border-top: none;
+        padding: 1.5rem 2rem;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .attribution {
+        flex-direction: row;
+        gap: 1rem;
+    }
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

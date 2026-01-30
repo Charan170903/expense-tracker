@@ -2,7 +2,7 @@ import { MdReceiptLong } from 'react-icons/md';
 import TransactionItem from '../TransactionItem/TransactionItem';
 import './TransactionsList.css';
 
-function TransactionsList({ transactions, onDelete, onUpdateSubscription }) {
+function TransactionsList({ transactions, onDelete, onUpdateSubscription, isLoading }) {
     return (
         <section className="transactions-list">
             <div className="transactions-list__header">
@@ -15,7 +15,12 @@ function TransactionsList({ transactions, onDelete, onUpdateSubscription }) {
                 </span>
             </div>
 
-            {transactions.length === 0 ? (
+            {isLoading ? (
+                <div className="transactions-list__empty">
+                    <div className="spinner" style={{ margin: '2rem auto' }}></div>
+                    <p className="transactions-list__empty-text">Loading...</p>
+                </div>
+            ) : transactions.length === 0 ? (
                 <div className="transactions-list__empty">
                     <MdReceiptLong className="transactions-list__empty-icon" />
                     <p className="transactions-list__empty-text">No transactions yet</p>

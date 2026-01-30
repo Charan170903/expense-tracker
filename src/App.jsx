@@ -9,6 +9,9 @@ import TransactionsList from './components/TransactionsList/TransactionsList';
 import AddTransactionModal from './components/AddTransactionModal/AddTransactionModal';
 import SavingsStats from './components/SavingsStats/SavingsStats';
 import DailyInsight from './components/DailyInsight/DailyInsight';
+import Login from './components/Login/Login'; // Import Login
+import { useAuth } from './context/AuthContext'; // Import Auth
+import { transactionService } from './services/api'; // Import API
 import { detectSubscriptions } from './utils/subscriptionDetector';
 import { detectCategoryDrift, detectMicroLeaks, getDailyInsight } from './utils/insightEngine';
 import { getStoredAnchors, archivePreviousPeriods, findActiveMemoryAnchor } from './utils/memoryArchivist';
@@ -17,8 +20,10 @@ import './App.css';
 dayjs.extend(customParseFormat);
 
 function App() {
+  const { user, loading: authLoading } = useAuth(); // Auth hook
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [transactions, setTransactions] = useState([]);
+  const [dataLoading, setDataLoading] = useState(false); // Data loading state
   const [selectedMonth, setSelectedMonth] = useState(dayjs().format('MMM YYYY'));
   const [selectedRange, setSelectedRange] = useState('month');
   const [theme, setTheme] = useState(() => {
@@ -37,34 +42,48 @@ function App() {
   };
 
   /**
-   * Captures historical patterns (anchors) when previous period data changes.
+   * Fetch transactions when user logs in
    */
   useEffect(() => {
-    if (transactions.length > 0) {
-      const stored = getStoredAnchors();
-      const updated = archivePreviousPeriods(transactions, stored);
-      setMemoryAnchors(updated);
-    }
-  }, [transactions]);
+    const fetchTransactions = async () => {
+      if (user) {
+        setDataLoading(true);
+        try {
+          const data = await transactionService.getAll();
+          // Transform API data to match frontend structure (if needed)
+          // Backend returns _id, frontend uses id. Map it.
+          // Also date in backend is occurredAt, frontend uses date.
+          const mappedData = data.map(t => ({
+            id: t._id,
+            title: t.title,
+            amount: t.amount,
+            type: t.type,
+            category: t.category,
+            date: dayjs(t.occurredAt).format('YYYY-MM-DD')
+          }));
+          setTransactions(mappedData);
 
-  useEffect(() => {
-    const savedTransactions = localStorage.getItem('transactions');
-    if (savedTransactions) {
-      try {
-        const parsed = JSON.parse(savedTransactions);
-        setTransactions(parsed);
-      } catch (error) {
-        console.error('Error loading transactions:', error);
+          // Legacy anchor logic - kept local for now
+          // Could move to backend later
+          const stored = getStoredAnchors();
+          const updated = archivePreviousPeriods(mappedData, stored);
+          setMemoryAnchors(updated);
+        } catch (err) {
+          console.error("Failed to fetch transactions", err);
+        } finally {
+          setDataLoading(false);
+        }
+      } else {
         setTransactions([]);
       }
-    }
-  }, []);
+    };
 
-  useEffect(() => {
-    if (transactions.length >= 0) {
-      localStorage.setItem('transactions', JSON.stringify(transactions));
-    }
-  }, [transactions]);
+    fetchTransactions();
+  }, [user]);
+
+  // Removed localStorage persistence for transactions
+
+
 
   const sortedTransactions = useMemo(() => {
     return [...transactions].sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
@@ -284,20 +303,48 @@ function App() {
     }).format(amount);
   };
 
-  const handleAddTransaction = (transaction) => {
-    const newTransaction = {
-      ...transaction,
-      subscriptionStatus: null
-    };
-    setTransactions([newTransaction, ...transactions]);
+  const handleAddTransaction = async (transaction) => {
+    try {
+      // Backend expects: title, amount, category, type, occurredAt
+      const payload = {
+        title: transaction.title,
+        amount: Number(transaction.amount),
+        category: transaction.category,
+        type: transaction.type,
+        occurredAt: transaction.date // frontend passes 'YYYY-MM-DD' which is valid date string
+      };
 
-    const monthOfTransaction = dayjs(transaction.date).format('MMM YYYY');
-    setSelectedMonth(monthOfTransaction);
+      const savedTx = await transactionService.create(payload);
+
+      // Map back to frontend format
+      const newTransaction = {
+        id: savedTx._id,
+        title: savedTx.title,
+        amount: savedTx.amount,
+        type: savedTx.type,
+        category: savedTx.category,
+        date: dayjs(savedTx.occurredAt).format('YYYY-MM-DD'),
+        subscriptionStatus: null
+      };
+
+      setTransactions([newTransaction, ...transactions]);
+      const monthOfTransaction = dayjs(transaction.date).format('MMM YYYY');
+      setSelectedMonth(monthOfTransaction);
+    } catch (err) {
+      console.error("Failed to add transaction", err);
+      alert("Failed to save transaction");
+    }
   };
 
-  const handleDeleteTransaction = (id) => {
+  const handleDeleteTransaction = async (id) => {
     if (window.confirm('Are you sure you want to delete this transaction?')) {
-      setTransactions(transactions.filter((t) => t.id !== id));
+      try {
+        await transactionService.delete(id);
+        setTransactions(transactions.filter((t) => t.id !== id));
+      } catch (err) {
+        console.error("Failed to delete transaction", err);
+        alert("Failed to delete transaction");
+      }
     }
   };
 
@@ -307,6 +354,12 @@ function App() {
     ));
   };
 
+
+  // If auth is loading, show nothing or spinner
+  if (authLoading) return <div className="loading-screen">Loading...</div>;
+
+  // If no user, show login
+  if (!user) return <Login theme={theme} onToggleTheme={toggleTheme} />;
 
   return (
     <div className="app">
@@ -357,6 +410,7 @@ function App() {
               transactions={filteredTransactions}
               onDelete={handleDeleteTransaction}
               onUpdateSubscription={handleUpdateSubscriptionStatus}
+              isLoading={dataLoading}
             />
           </div>
         </main>

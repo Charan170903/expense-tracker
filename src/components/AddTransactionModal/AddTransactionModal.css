@@ -326,8 +326,8 @@
 
 .form-input:focus {
     outline: none;
-    border-color: var(--color-text-primary, #0f172a);
-    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+    border-color: var(--color-brand-accent);
+    box-shadow: 0 0 0 1px var(--color-brand-accent);
 }
 
 .form-input::placeholder {
@@ -358,7 +358,7 @@
 }
 
 .amount-input {
-    padding-left: 2.5rem;
+    padding-left: 2.75rem !important;
     font-size: 1.25rem;
     font-weight: 600;
 }
@@ -406,18 +406,20 @@
 }
 
 .category-btn.active {
-    border-color: var(--color-text-primary, #0f172a);
-    background: var(--color-bg-primary, #f8fafc);
-    box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.1);
+    border-color: var(--color-brand-accent);
+    background: var(--color-bg-primary);
+    box-shadow: 0 0 0 1px var(--color-brand-accent);
 }
 
 .category-btn.active .category-icon {
-    color: var(--color-text-primary, #0f172a);
+    color: var(--color-brand-accent);
 }
 
 .category-btn.active .category-label {
-    color: var(--color-text-primary, #0f172a);
+    color: var(--color-brand-accent);
 }
+
+
 
 .tag-cloud {
     display: flex;
@@ -471,8 +473,8 @@
 
 .form-textarea:focus {
     outline: none;
-    border-color: var(--color-text-primary, #0f172a);
-    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+    border-color: var(--color-brand-accent);
+    box-shadow: 0 0 0 1px var(--color-brand-accent);
 }
 
 .form-textarea::placeholder {
@@ -514,9 +516,9 @@
 }
 
 .btn-primary {
-    background: var(--color-text-primary, #0f172a);
-    color: var(--color-bg-secondary, #ffffff);
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.3);
+    background: var(--color-brand-accent);
+    color: var(--color-accent-text);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-primary--income {
@@ -530,16 +532,16 @@
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.4);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-primary--income:hover {
-    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.25);
 }
 
 .btn-primary--expense:hover {
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.25);
 }
 
 .btn-primary:active {
