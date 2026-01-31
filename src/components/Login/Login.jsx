@@ -39,12 +39,17 @@ const Login = ({ theme, onToggleTheme }) => {
                 await register(email, password);
             } else if (authMode === 'forgot') {
                 const res = await forgotPassword(email);
-                let msg = res.message;
-                if (res.developmentCode) {
-                    msg += ` (Dev Code: ${res.developmentCode})`;
+                if (res.success) {
+                    let msg = res.message;
+                    if (res.developmentCode) {
+                        msg += ` (Dev Code: ${res.developmentCode})`;
+                    }
+                    setSuccessMessage(msg);
+                    setAuthMode('reset');
+                } else {
+                    // Fallback for any 200-OK-but-failed scenarios
+                    setError(res.message || 'Unable to process request');
                 }
-                setSuccessMessage(msg);
-                setAuthMode('reset');
             } else if (authMode === 'reset') {
                 await resetPassword(email, resetCode, password);
                 setSuccessMessage('Password reset successful! Please sign in.');
