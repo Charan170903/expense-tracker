@@ -80,7 +80,26 @@
 .panel-header {
     padding: 1.5rem 2rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Mobile branding - visible only on mobile */
+.mobile-branding {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-brand-name {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--color-text-primary);
+    line-height: 1;
+}
+
+.mobile-brand-name .accent {
+    color: var(--color-brand-accent);
 }
 
 .theme-toggle-btn {
@@ -94,6 +113,7 @@
     color: var(--color-text-secondary);
     transition: all 0.2s ease;
     background: transparent;
+    flex-shrink: 0;
 }
 
 .theme-toggle-btn:hover {
@@ -109,12 +129,12 @@
     max-width: 480px;
     width: 100%;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1.5rem;
     animation: slideUp 0.6s ease-out;
 }
 
 .form-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     text-align: left;
     /* Aligned left for composed feel */
 }
@@ -128,14 +148,15 @@
 
 .form-subtitle {
     color: var(--color-text-secondary);
-    font-size: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 /* --- Form Elements --- */
 .premium-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .input-group {
@@ -258,6 +279,37 @@
     align-items: center;
 }
 
+.form-success {
+    padding: 0.75rem 1rem;
+    background-color: var(--color-income-bg);
+    color: var(--color-income);
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.success-icon {
+    font-size: 1.1rem;
+}
+
+.forgot-password-link {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -0.5rem;
+}
+
+.forgot-password-link .link-btn {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+.forgot-password-link .link-btn:hover {
+    opacity: 1;
+}
+
 /* --- Attribution Footer --- */
 .panel-footer {
     padding: 2rem;
@@ -291,6 +343,34 @@
 }
 
 /* --- Media Queries --- */
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+    .form-container {
+        padding: 1rem;
+    }
+
+    .panel-header {
+        padding: 1rem 1.25rem;
+    }
+
+    .form-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-title {
+        font-size: 1.75rem;
+    }
+
+    .mobile-brand-name {
+        font-size: 1.5rem;
+    }
+
+    .panel-footer {
+        padding: 1.5rem 1.25rem;
+    }
+}
+
 @media (min-width: 1024px) {
     .login-page {
         flex-direction: row;
@@ -298,6 +378,19 @@
 
     .login-visual-panel {
         display: flex;
+    }
+
+    /* Hide mobile branding on desktop */
+    .mobile-branding {
+        display: none;
+    }
+
+    .panel-header {
+        justify-content: flex-end;
+    }
+
+    .form-container {
+        padding: 2rem;
     }
 
     .panel-footer {
