@@ -118,8 +118,10 @@ function AddTransactionModal({ isOpen, onClose, onAdd, currentFilteredTransactio
             return;
         }
 
+        const transactionId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
         const transaction = {
-            id: Date.now(),
+            id: transactionId,
             type,
             title: title.trim(),
             amount: parseFloat(amount),
