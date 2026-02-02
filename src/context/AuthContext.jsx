@@ -4,16 +4,9 @@ import { authService } from '../services/api';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const storedUser = authService.getCurrentUser();
-        if (storedUser) {
-            setUser(storedUser);
-        }
-        setLoading(false);
-    }, []);
+    // Use lazy initializer so we don't call setUser inside an effect synchronously
+    const [user, setUser] = useState(() => authService.getCurrentUser());
+    const [loading, setLoading] = useState(false);
 
     const login = async (email, password) => {
         const data = await authService.login(email, password);

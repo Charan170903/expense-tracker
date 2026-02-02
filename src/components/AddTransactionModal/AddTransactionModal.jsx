@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { generateTransactionId } from '../../utils/generateTransactionId';
 import dayjs from 'dayjs';
 import {
     MdClose,
@@ -118,7 +119,7 @@ function AddTransactionModal({ isOpen, onClose, onAdd, currentFilteredTransactio
             return;
         }
 
-        const transactionId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const transactionId = generateTransactionId();
 
         const transaction = {
             id: transactionId,
