@@ -196,7 +196,7 @@ npm install
 cp .env.example .env
 
 # Edit .env
-# VITE_API_URL=http://localhost:5000/api
+# VITE_API_BASE_URL=http://localhost:5000/api
 
 # Start development server
 npm run dev
@@ -361,7 +361,7 @@ ALLOWED_ORIGINS=https://your-frontend-url.vercel.app
 
 ```env
 # API Configuration
-VITE_API_URL=https://your-backend-url.onrender.com/api
+VITE_API_BASE_URL=https://your-backend-url.onrender.com/api
 ```
 
 ---
@@ -413,7 +413,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📌 Project Status
 
-**Status**: ✅ Production Ready & Deployed
+**Status**: ✅ Deployed
 **Version**: 1.0.0
 **Last Updated**: January 30, 2026
 
