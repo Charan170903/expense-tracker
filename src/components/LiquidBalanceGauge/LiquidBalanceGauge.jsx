@@ -69,28 +69,16 @@ const LiquidBalanceGauge = ({ balance, maxBalance = 50000 }) => {
                             <stop offset="0%" stopColor={colorPhysics} stopOpacity="0.8" />
                             <stop offset="100%" stopColor={colorPhysics} stopOpacity="1" />
                         </linearGradient>
-
-                        <filter id="viscosity" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" result="blur" />
-                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 12 -5" result="goo" />
-                        </filter>
                     </defs>
 
                     <rect width="100" height="100" className="liquid-money-gauge__bg" />
 
                     <g style={{
                         transform: `translateY(${liquidLevel}px)`,
-                        transition: 'transform 2s cubic-bezier(0.2, 1, 0.3, 1)'
+                        transition: 'transform 2s cubic-bezier(0.2, 1, 0.3, 1)',
+                        willChange: 'transform' // GPU Hint
                     }}>
-                        {/* Layer 3 - Deep/Far Wave */}
-                        <path
-                            className="liquid-money-gauge__wave liquid-money-gauge__wave--deep"
-                            d="M 0 0 Q 30 3 60 0 T 120 0 T 180 0 T 240 0 V 150 H 0 Z"
-                            fill={colorPhysics}
-                            fillOpacity="0.2"
-                        />
-
-                        {/* Layer 2 - Mid Wave */}
+                        {/* Layer 2 - Mid Wave (Simpler Background) */}
                         <path
                             className="liquid-money-gauge__wave liquid-money-gauge__wave--back"
                             d="M 0 0 Q 30 5 60 0 T 120 0 T 180 0 T 240 0 V 150 H 0 Z"

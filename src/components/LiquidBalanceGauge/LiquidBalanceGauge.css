@@ -43,10 +43,11 @@
     opacity: 0.3;
 }
 
-/* Base Wave Class - Smooth and Calm */
+/* Base Wave Class - Optimized for performance */
 .liquid-money-gauge__wave {
     transition: all 1s ease;
-    filter: url(#viscosity);
+    will-change: transform;
+    /* Promote to GPU layer */
 }
 
 .liquid-money-gauge__wave--front {
@@ -55,10 +56,6 @@
 
 .liquid-money-gauge__wave--back {
     animation: calmWaveBack 18s linear infinite;
-}
-
-.liquid-money-gauge__wave--deep {
-    animation: calmWaveDeep 24s linear infinite;
 }
 
 .liquid-money-gauge__wave--reflection {
@@ -84,16 +81,6 @@
 
     100% {
         transform: translateX(60px);
-    }
-}
-
-@keyframes calmWaveDeep {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-180px);
     }
 }
 
