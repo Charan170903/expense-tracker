@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useContext } from 'react';
 import { authService } from '../services/api';
 
 const AuthContext = createContext();
@@ -6,7 +6,6 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     // Use lazy initializer so we don't call setUser inside an effect synchronously
     const [user, setUser] = useState(() => authService.getCurrentUser());
-    const [loading, setLoading] = useState(false);
 
     const login = async (email, password) => {
         const data = await authService.login(email, password);
@@ -34,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout, loading, forgotPassword, resetPassword }}>
+        <AuthContext.Provider value={{ user, login, register, logout, forgotPassword, resetPassword }}>
             {children}
         </AuthContext.Provider>
     );
