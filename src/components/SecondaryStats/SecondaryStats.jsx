@@ -1,7 +1,7 @@
-import { MdTrendingUp, MdTrendingDown } from 'react-icons/md';
+import { MdTrendingUp, MdTrendingDown, MdAdd } from 'react-icons/md';
 import './SecondaryStats.css';
 
-function SecondaryStats({ income, expense, activeSubscriptions, noSpendDays }) {
+function SecondaryStats({ income, expense, activeSubscriptions, noSpendDays, onAddClick }) {
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('en-IN', {
             style: 'currency',
@@ -33,6 +33,11 @@ function SecondaryStats({ income, expense, activeSubscriptions, noSpendDays }) {
                     </div>
                 </div>
             </div>
+
+            {/* Central Add Action */}
+            <button className="secondary-add-btn" onClick={onAddClick}>
+                <MdAdd /> Add Transaction
+            </button>
 
             <div className="secondary-stats__badges">
                 {activeSubscriptions > 0 && (

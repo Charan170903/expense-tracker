@@ -4,11 +4,14 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import Header from './components/Header/Header';
 import BalanceCard from './components/BalanceCard/BalanceCard';
 import SecondaryStats from './components/SecondaryStats/SecondaryStats';
-import AddTransactionAction from './components/AddTransactionAction/AddTransactionAction';
+
 import TransactionsList from './components/TransactionsList/TransactionsList';
 import AddTransactionModal from './components/AddTransactionModal/AddTransactionModal';
 import SavingsStats from './components/SavingsStats/SavingsStats';
 import DailyInsight from './components/DailyInsight/DailyInsight';
+import LiquidBalanceGauge from './components/LiquidBalanceGauge/LiquidBalanceGauge';
+import CategoryDonutChart from './components/CategoryDonutChart/CategoryDonutChart';
+import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login'; // Import Login
 import { useAuth } from './context/AuthContext'; // Import Auth
 import { transactionService } from './services/api'; // Import API
@@ -376,17 +379,18 @@ function App() {
         <main className="app__main">
           <div className="dashboard-grid">
             <div className="dashboard-col dashboard-col--left">
-              <BalanceCard
+              <LiquidBalanceGauge
                 balance={balance}
-                eomAwareness={eomAwarenessData}
-                confidence={confidenceData}
+                maxBalance={Math.max(savingsData.totalIncome, 1)}
               />
               <SecondaryStats
                 income={periodTotals.income}
                 expense={periodTotals.expense}
                 activeSubscriptions={activeSubscriptionsCount}
                 noSpendDays={noSpendDaysCount}
+                onAddClick={() => setIsModalOpen(true)}
               />
+              <CategoryDonutChart transactions={filteredTransactions} />
             </div>
 
             <div className="dashboard-col dashboard-col--right">
@@ -398,20 +402,18 @@ function App() {
                 microLeakInsight={microLeakInsight}
                 formatCurrency={formatCurrency}
               />
+
+
+
+              <div className="transactions-container">
+                <TransactionsList
+                  transactions={filteredTransactions}
+                  onDelete={handleDeleteTransaction}
+                  onUpdateSubscription={handleUpdateSubscriptionStatus}
+                  isLoading={dataLoading}
+                />
+              </div>
             </div>
-          </div>
-
-          <div className="action-zone">
-            <AddTransactionAction onAddClick={() => setIsModalOpen(true)} />
-          </div>
-
-          <div className="transactions-container">
-            <TransactionsList
-              transactions={filteredTransactions}
-              onDelete={handleDeleteTransaction}
-              onUpdateSubscription={handleUpdateSubscriptionStatus}
-              isLoading={dataLoading}
-            />
           </div>
         </main>
 
@@ -422,6 +424,7 @@ function App() {
           currentFilteredTransactions={filteredTransactions}
           currentStats={savingsData}
         />
+        <Footer />
       </div>
     </div>
   );

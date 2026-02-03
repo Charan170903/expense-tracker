@@ -36,7 +36,12 @@ function SavingsStats({ savingsData, selectedRange, formatCurrency }) {
                         <h3 className="savings-card__value">{formatCurrency(totalSavings)}</h3>
                         <div className="savings-card__footer">
                             <span className={`savings-card__rate ${totalSavings >= 0 ? 'positive' : 'negative'}`}>
-                                {savingsRate}% savings rate
+                                {totalSavings >= 0
+                                    ? `${savingsRate}% savings rate`
+                                    : (totalIncome > 0
+                                        ? `${Math.abs(savingsRate)}% deficit`
+                                        : 'Budget deficit')
+                                }
                             </span>
                         </div>
                     </div>

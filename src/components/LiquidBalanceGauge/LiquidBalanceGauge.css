@@ -1,0 +1,240 @@
+.liquid-money-card {
+    position: relative;
+    width: 100%;
+    background: var(--color-bg-secondary);
+    border-radius: 20px;
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.liquid-money-card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px);
+}
+
+.liquid-money-card:active {
+    transform: scale(0.98);
+}
+
+.liquid-money-gauge {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.liquid-money-gauge__svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.liquid-money-gauge__bg {
+    fill: var(--color-bg-primary);
+    opacity: 0.3;
+}
+
+/* Base Wave Class - Smooth and Calm */
+.liquid-money-gauge__wave {
+    transition: all 1s ease;
+    filter: url(#viscosity);
+}
+
+.liquid-money-gauge__wave--front {
+    animation: calmWave 12s linear infinite;
+}
+
+.liquid-money-gauge__wave--back {
+    animation: calmWaveBack 18s linear infinite;
+}
+
+.liquid-money-gauge__wave--deep {
+    animation: calmWaveDeep 24s linear infinite;
+}
+
+.liquid-money-gauge__wave--reflection {
+    animation: calmWave 12s linear infinite;
+    mix-blend-mode: overlay;
+}
+
+/* Animations - Different speeds and offsets for realism */
+@keyframes calmWave {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-120px);
+    }
+}
+
+@keyframes calmWaveBack {
+    0% {
+        transform: translateX(-60px);
+    }
+
+    100% {
+        transform: translateX(60px);
+    }
+}
+
+@keyframes calmWaveDeep {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-180px);
+    }
+}
+
+/* Splash Effect Interaction */
+.liquid-money-card.is-splashing .liquid-money-gauge__wave--front {
+    animation: splashWave 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes splashWave {
+    0% {
+        transform: translateX(0) scaleY(1);
+    }
+
+    20% {
+        transform: translateX(-20px) scaleY(1.4);
+    }
+
+    100% {
+        transform: translateX(-120px) scaleY(1);
+    }
+}
+
+/* Information Overlay Styles */
+.liquid-money-gauge__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.2rem;
+    pointer-events: none;
+    padding: 1.5rem;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.liquid-money-gauge__content--base {
+    z-index: 10;
+    color: var(--color-text-primary);
+}
+
+.liquid-money-gauge__content--overlay {
+    z-index: 20;
+    color: #ffffff;
+}
+
+.liquid-money-gauge__content--overlay * {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.liquid-money-gauge__title {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-secondary);
+    opacity: 0.7;
+}
+
+.liquid-money-gauge__value {
+    font-size: 2.25rem;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.liquid-money-gauge__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+}
+
+.liquid-money-gauge__percentage {
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.liquid-money-gauge__divider {
+    opacity: 0.3;
+}
+
+.liquid-money-gauge__status {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Pro Glass Effects */
+.liquid-money-card__glass {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.05) 40%,
+            transparent 100%);
+    pointer-events: none;
+    z-index: 15;
+}
+
+[data-theme='dark'] .liquid-money-card__glass {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.01) 40%,
+            transparent 100%);
+}
+
+/* Floating Glimmer Reflection */
+.liquid-money-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.liquid-money-card:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .liquid-money-gauge {
+        height: 160px;
+    }
+
+    .liquid-money-gauge__value {
+        font-size: 1.85rem;
+    }
+}

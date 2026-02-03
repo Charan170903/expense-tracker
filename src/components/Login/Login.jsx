@@ -14,6 +14,7 @@ import {
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import PasswordStrengthIndicator from '../PasswordStrengthIndicator/PasswordStrengthIndicator';
 import './Login.css';
+import Footer from '../Footer/Footer';
 
 const Login = ({ theme, onToggleTheme }) => {
     const [authMode, setAuthMode] = useState('login'); // 'login', 'register', 'forgot', 'reset'
@@ -258,19 +259,7 @@ const Login = ({ theme, onToggleTheme }) => {
                     </div>
                 </div>
 
-                <footer className="panel-footer">
-                    <div className="attribution">
-                        <p>Project by Charankarthikeyan S</p>
-                        <div className="social-links">
-                            <a href="https://github.com/Charan170903" target="_blank" rel="noopener noreferrer">
-                                <FaGithub />
-                            </a>
-                            <a href="https://www.linkedin.com/in/charankarthikeyan-selvakumar-a7a731225/" target="_blank" rel="noopener noreferrer">
-                                <FaLinkedin />
-                            </a>
-                        </div>
-                    </div>
-                </footer>
+                <Footer />
             </div>
         </div>
     );

@@ -78,11 +78,219 @@
     font-size: 0.85rem;
     color: var(--color-text-primary);
     margin: 0;
-    line-height: 1.4;
+    line-height: 1.5;
     font-weight: 500;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    max-height: 2.7em;
+    /* Fallback for older browsers */
+}
+
+.daily-insight__message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.daily-insight__read-more {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-top: 0.35rem;
+    padding: 0.2rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    opacity: 0.8;
+    transition: all 0.2s ease;
+    border-bottom: 1.5px solid transparent;
+}
+
+.daily-insight__read-more:hover {
+    opacity: 1;
+    border-bottom-color: var(--color-accent);
+}
+
+/* Insight Modal Styles */
+.insight-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 1rem;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.insight-modal-content {
+    background: var(--color-bg-secondary);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: var(--shadow-xl), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from {
+        transform: scale(0.9) translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.insight-modal-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--color-bg-elevated);
+}
+
+.insight-modal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.insight-modal-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    background: #fef9c3;
+    color: #a16207;
+}
+
+.insight-modal-icon--anchor {
+    background: #e0e7ff;
+    color: #4f46e5;
+}
+
+[data-theme='dark'] .insight-modal-icon {
+    background: rgba(234, 179, 8, 0.15);
+    color: #fde047;
+}
+
+[data-theme='dark'] .insight-modal-icon--anchor {
+    background: rgba(79, 70, 229, 0.15);
+    color: #818cf8;
+}
+
+.insight-modal-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
+    color: var(--color-text-secondary);
+}
+
+.insight-modal-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-neutral-bg);
+    color: var(--color-text-secondary);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+}
+
+.insight-modal-close:hover {
+    background: var(--color-expense-bg);
+    color: var(--color-expense-text);
+    transform: rotate(90deg);
+}
+
+.insight-modal-body {
+    padding: 2rem 1.5rem;
+    text-align: left;
+}
+
+.insight-modal-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    margin: 0;
+}
+
+.insight-modal-footer {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: flex-end;
+    background: var(--color-bg-primary);
+}
+
+.insight-modal-done-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--color-accent);
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.insight-modal-done-btn:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Base fade animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .insight-modal-content {
+        max-width: 100%;
+        border-radius: 24px 24px 0 0;
+        position: fixed;
+        bottom: 0;
+        animation: slideUpMobile 0.4s cubic-bezier(0, 0.55, 0.45, 1);
+    }
+
+    @keyframes slideUpMobile {
+        from {
+            transform: translateY(100%);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
 }
