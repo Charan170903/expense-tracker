@@ -224,79 +224,9 @@ function App() {
     return findActiveMemoryAnchor(filteredTransactions, memoryAnchors);
   }, [filteredTransactions, memoryAnchors]);
 
-  /**
-   * Generates feedback for the current month's closing window (last 7 days).
-   */
-  const eomAwarenessData = useMemo(() => {
-    const today = dayjs();
-    const anchorDate = dayjs(selectedMonth, 'MMM YYYY');
 
-    if (!today.isSame(anchorDate, 'month')) return null;
 
-    const lastDay = today.endOf('month').date();
-    const currentDay = today.date();
-    const daysLeft = lastDay - currentDay + 1;
 
-    if (daysLeft <= 7 && daysLeft > 0) {
-      return {
-        daysLeft,
-        isLastDay: daysLeft === 1
-      };
-    }
-    return null;
-  }, [selectedMonth]);
-
-  /**
-   * Derives a confidence state (0-100 score) based on:
-   * 1. Savings Rate (40%)
-   * 2. Financial Runway (30%) - Daily budget vs actual spend velocity
-   * 3. Recent Expense Velocity (30%) - 7-day trend vs period average
-   */
-  const confidenceData = useMemo(() => {
-    if (filteredTransactions.length === 0) return { state: 'stable', text: 'Position is currently stable' };
-
-    const today = dayjs();
-    const anchorDate = dayjs(selectedMonth, 'MMM YYYY');
-    const isCurrentMonth = today.isSame(anchorDate, 'month');
-
-    const sRate = savingsData.savingsRate;
-    const savingsScore = Math.max(0, Math.min(sRate * 2, 40));
-
-    let runwayScore = 20;
-    const expenses = filteredTransactions.filter(t => t.type === 'expense');
-    const totalExp = expenses.reduce((sum, t) => sum + t.amount, 0);
-
-    if (isCurrentMonth && balance > 0) {
-      const daysLeft = today.endOf('month').date() - today.date() + 1;
-      const dailyAllowable = balance / daysLeft;
-      const daysElapsed = today.date();
-      const avgDailySpend = totalExp / daysElapsed || 1;
-
-      const runwayRatio = dailyAllowable / avgDailySpend;
-      runwayScore = Math.max(0, Math.min(runwayRatio * 15, 30));
-    } else if (balance <= 0) {
-      runwayScore = 0;
-    }
-
-    const recentExpenses = filteredTransactions.filter(t =>
-      t.type === 'expense' && dayjs(t.date).isAfter(today.subtract(7, 'day'))
-    );
-    const recentTotal = recentExpenses.reduce((sum, t) => sum + t.amount, 0);
-    const recentDaily = recentTotal / 7;
-
-    const periodDays = selectedRange === 'month' ? today.date() : (selectedRange === '3months' ? 90 : 180);
-    const periodDaily = totalExp / periodDays || 1;
-
-    let velocityScore = 30;
-    if (recentDaily > periodDaily * 1.5) velocityScore = 0;
-    else if (recentDaily > periodDaily * 1.2) velocityScore = 15;
-
-    const totalScore = savingsScore + runwayScore + velocityScore;
-
-    if (totalScore >= 65) return { state: 'stable', text: 'Position is currently stable' };
-    if (totalScore >= 35) return { state: 'stretched', text: 'Budget is slightly stretched' };
-    return { state: 'attention', text: 'Patterns require closer attention' };
-  }, [savingsData, balance, filteredTransactions, selectedMonth, selectedRange]);
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', {

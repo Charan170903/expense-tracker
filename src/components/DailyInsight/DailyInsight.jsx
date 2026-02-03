@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import { MdLightbulb, MdHistory, MdClose } from 'react-icons/md';
 import './DailyInsight.css';
 
