@@ -3,11 +3,15 @@ import axios from 'axios';
 // Use environment variable for API URL
 // In development: http://localhost:5000/api
 // In production: Your Render backend URL
-const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_BASE_URL ||
+    (import.meta.env.MODE === 'production'
+        ? 'https://expense-tracker-backend-e2yj.onrender.com/api'
+        : 'http://localhost:5000/api');
 
 // Create axios instance
 const api = axios.create({
     baseURL: API_URL,
+    withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
     },
